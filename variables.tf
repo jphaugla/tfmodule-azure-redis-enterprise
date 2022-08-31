@@ -21,16 +21,27 @@ variable "net-name" {
 
 variable "cluster-name" {
   description = "The domain name for the cluster (in front of the cluster-base-domain)."
+  default = "jphaugla"
 }
 
 variable "cluster-base-domain" {
   description = "A base domain name you own. Helpful if it's managed by a zone file in Azure."
-  default     = "azure.redis.life"
+  default = "not-defined"
 }
 
 variable "cluster-base-resource-group" {
   description = "The resource group that contains the zone file for the cluster-base-domain."
-  default     = null
+  default = "not-defined"
+}
+
+variable "username" {
+  description = "redis enterprise user name.  Should be an email address"
+  default = "demo@redislabs.com"
+}
+
+variable "password" {
+  description = "redis enterprise password"
+  default = ""
 }
 
 variable "node-size" {
@@ -105,4 +116,3 @@ variable "open-nets" {
   description = "CIDRs that will have access to everything"
   default     = []
 }
-
