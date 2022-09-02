@@ -46,7 +46,7 @@ variable "password" {
 
 variable "node-size" {
   description = "The Size of the VM to run for nodes."
-  default     = "Standard_DS1_v2"
+  default     = "Standard_DS4_v2"
 }
 
 # NOTE that you can't change this without changing parts of the provisioning scripts.
@@ -92,7 +92,10 @@ variable "ssh-user" {
 
 variable "ssh-key" {
   description = "The SSH Public Key path"
-  default     = "~/.ssh/id_rsa_azure.pub"
+}
+
+variable "ssh-private-key" {
+  description = "The SSH Private Key path"
 }
 
 variable "accelerated-networking" {
