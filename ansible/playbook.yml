@@ -25,7 +25,7 @@
         path: "/var/tmp/re-download"
     - name: Unarchive software
       unarchive: 
-        src: "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.2.12/redislabs-6.2.12-68-rhel7-x86_64.tar"
+        src: "{{ S3_RE_BINARY }}"
         dest: /var/tmp/re-download
         remote_src: yes
     - name: Install the software

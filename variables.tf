@@ -70,6 +70,32 @@ variable "node-version" {
   default     = "latest"
 }
 
+variable "test-size" {
+  description = "The Size of the VM to run for tester node."
+  default     = "Standard_DS2_v2"
+}
+
+# NOTE that you can't change this without changing parts of the provisioning scripts.
+variable "test-publisher" {
+  description = "The owner of the image"
+  default     = "RedHat"
+}
+
+variable "test-offer" {
+  description = "The type of the image"
+  default     = "RHEL"
+}
+
+variable "test-sku" {
+  description = "The SKU of the image"
+  default     = "7.7"
+}
+
+variable "test-version" {
+  description = "The version of the image"
+  default     = "latest"
+}
+
 variable "subnet-count" {
   description = "The number of subnets to spin up"
   default     = null

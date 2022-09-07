@@ -57,5 +57,5 @@ data "azurerm_public_ip" "fixedip" {
   count               = var.node-count
   name                = element(azurerm_public_ip.fixedip.*.name, count.index)
   resource_group_name = azurerm_resource_group.resource.name
-  depends_on          = [azurerm_virtual_machine.redis-nodes, azurerm_network_interface.nic]
+  depends_on          = [azurerm_linux_virtual_machine.redis-nodes, azurerm_network_interface.nic]
 }

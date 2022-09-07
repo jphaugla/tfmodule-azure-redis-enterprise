@@ -23,5 +23,10 @@ module "azure" {
   node-offer     = "RHEL"
   node-sku       = "7-RAW"
   node-version   = "latest"
+  test-size = "Standard_DS4_v2"
+  test-publisher = "Canonical"
+  test-offer     = "0001-com-ubuntu-server-jammy"
+  test-sku       = "22_04-lts-gen2"
+  test-version   = "latest"
   re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.2.12/redislabs-6.2.12-68-rhel7-x86_64.tar"
 }
