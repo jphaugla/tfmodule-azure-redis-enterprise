@@ -1,7 +1,7 @@
 ---
 enable_volumes: "{{ ENABLE_VOLUMES|default(true)|bool }}"
 enable_flash: "{{ ENABLE_FLASH|default(true)|bool }}"
-s3_re_binary: "{{ 
+s3_re_binary: "{{ S3_RE_BINARY }}"
 
 deb_packages:
   - jq
@@ -14,9 +14,7 @@ deb_packages:
   - automake
   - libbsd-dev
   - libltdl-dev
-  - libltdl7
   - libtool
-  - libevent-openssl-2.1-6
   - libpcre3-dev 
   - libevent-dev
   - pkg-config

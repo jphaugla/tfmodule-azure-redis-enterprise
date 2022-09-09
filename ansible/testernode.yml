@@ -15,7 +15,6 @@
       - libltdl-dev
       - libltdl7
       - libtool
-      - libevent-openssl-2.1-6
       - libpcre3-dev 
       - libevent-dev
       - pkg-config
@@ -106,9 +105,9 @@
 
     - name: chown redisearchstock
       file: 
-        dest: /home/ubuntu/redisearchStock 
-        owner: ubuntu 
-        group: ubuntu
+        dest: /home/redislabs/redisearchStock 
+        owner: redislabs 
+        group: redislabs
         recurse: yes
 
     - name: Install Redis Insights
@@ -152,20 +151,20 @@
         name: golang
     - name: create binaries dir
       file:
-        path: /home/ubuntu/binaries
-        owner: ubuntu
-        group: ubuntu
+        path: /home/redislabs/binaries
+        owner: redislabs
+        group: redislabs
         mode: '0755'
         state: directory
     - name: wget java 18
       get_url:
         url: https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.deb
-        dest: /home/ubuntu/binaries
+        dest: /home/redislabs/binaries
         mode: '0755'
     - name: install jdk18
       command: "apt install -y ./jdk-18_linux-x64_bin.deb"
       args:
-        chdir: /home/ubuntu/binaries
+        chdir: /home/redislabs/binaries
         creates: /usr/lib/jvm/jdk-18
     - name: configure java
       shell: 
