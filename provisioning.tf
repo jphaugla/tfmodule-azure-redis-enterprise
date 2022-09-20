@@ -58,7 +58,7 @@ resource "null_resource" "tester-inventory-setup" {
   provisioner "local-exec" {
     command = "echo \"${element(data.template_file.ansible_tester_inventory.*.rendered, 1)}\" > /tmp/${var.location}_tester_node_app.ini"
   }
-  depends_on = [data.template_file.ansible_inventory]
+  depends_on = [data.template_file.ansible_tester_inventory]
 }
 
 resource "null_resource" "ssh-setup" {
