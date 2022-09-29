@@ -1,0 +1,12 @@
+- hosts: re_master:re_nodes
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /opt/redislabs/bin/python3
+  roles:
+    - setup-connections
+- hosts: re_master:re_nodes
+  gather_facts: True
+  vars:
+    ansible_python_interpreter: /opt/redislabs/bin/python3
+  roles:
+    - redis-enterprise

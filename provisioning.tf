@@ -23,6 +23,7 @@ data "template_file" "ansible_inventory" {
     host_ip  = element(azurerm_public_ip.fixedip.*.ip_address, count.index)
     location = var.location
     ncount   = count.index
+    master_ip  = element(azurerm_public_ip.fixedip.*.ip_address, 0)
   }
   depends_on = [azurerm_public_ip.fixedip, azurerm_linux_virtual_machine.redis-nodes]
 }
@@ -73,7 +74,7 @@ resource "null_resource" "ssh-setup" {
 resource "null_resource" "ansible-run" {
   count = var.node-count
   provisioner "local-exec" {
-    command = "ansible-playbook ${path.module}/ansible/playbook.yml --private-key ${var.ssh-private-key} -i /tmp/${var.location}_node_${count.index}.ini --become -e 'S3_RE_BINARY=${var.re-download-url}'" 
+    command = "ansible-playbook ${path.module}/ansible/playbook.yml --private-key ${var.ssh-private-key} -i /tmp/${var.location}_node_${count.index}.ini --become -e 'S3_RE_BINARY=${var.re-download-url}' -e 'INDEX_VALUE=${count.index}'" 
   }
   depends_on = [null_resource.remote-config]
 }
@@ -87,3 +88,18 @@ resource "null_resource" "ansible-run" {
   depends_on = [null_resource.remote-config]
 }
 
+resource "null_resource" "provision" {
+
+    triggers = {
+        always_run = "${timestamp()}"
+    }
+
+    provisioner "local-exec" {
+        working_dir = "../provisioners/"
+        command = "ansible-playbook -i '${var.instances_inventory_file}' --private-key ${var.ssh-private-key} playbook.yml ${var.ansible_verbosity_switch}"
+    }
+
+    depends_on = [
+azurerm_public_ip.fixedip
+    ]
+}

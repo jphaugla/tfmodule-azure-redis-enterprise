@@ -106,6 +106,11 @@ variable "node-count" {
   default     = 3
 }
 
+variable "join-count" {
+  description = "The number of non-master re nodes"
+  default     = 2
+}
+
 variable "common-tags" {
   description = "A map of the tags to use for the resources that are deployed"
   type        = map(any)
@@ -144,4 +149,14 @@ variable "open-nets" {
   type        = list(any)
   description = "CIDRs that will have access to everything"
   default     = []
+}
+
+variable "instances_inventory_file" {
+    description = "Path and file name to send inventory details for ansible later."
+    default = "inventory"
+}
+
+variable "ansible_verbosity_switch" {
+    description = "Set the about of verbosity to pass through to the ansible playbook command. No additional verbosity by default. Example: -v or -vv or -vvv."
+    default = "-vvv"
 }
