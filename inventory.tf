@@ -1,9 +1,9 @@
 data  "template_file" "instances" {
     template = file("../templates/inventory.tpl")
-    
     vars = {
         re_master_ip = "${azurerm_public_ip.fixedip.0.ip_address}"
-        re_instance_hostnames = "${azurerm_public_ip.fixedip.*.name}"
+        re_instance_hostnames = "${join("\n", (azurerm_public_ip.fixedip.*.name) )}"
+        re_instance_ips = "${join("\n", (azurerm_public_ip.fixedip.*.ip_address) )}"
         re_node_ips = "${join("\n", slice( azurerm_public_ip.fixedip.*.ip_address, 1, length(azurerm_public_ip.fixedip.*.ip_address) ) )}"
         ssh_user = "${var.ssh-user}"
         cluster_size = "${var.node-count}"

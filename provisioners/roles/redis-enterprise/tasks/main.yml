@@ -1,6 +1,11 @@
 - name: API Readiness Check
   include_tasks: check-readiness.yml
 
+- name: Prepare Redis Nodes
+  include_tasks: prep-redis.yml
+  when:
+    - inventory_hostname in groups['all_node_ips']
+
 - name: Create Cluster
   include_tasks: create-cluster.yml
   when:

@@ -62,7 +62,7 @@ variable "node-offer" {
 
 variable "node-sku" {
   description = "The SKU of the image"
-  default     = "7.7"
+  default     = "7.9"
 }
 
 variable "node-version" {
