@@ -2,45 +2,27 @@
   file:
     state: directory
     path: "/redis"
-  become: yes
-  become_user: root
-  become_method: sudo
 - name: create re home dir
   file:
     state: directory
     path: "/redis"
-  become: yes
-  become_user: root
-  become_method: sudo
 - name: create download directory
   file:
     state: directory
     path: "/var/tmp/re-download"
-  become: yes
-  become_user: root
-  become_method: sudo
 - name: Unarchive software
   unarchive: 
     src: "{{ S3_RE_BINARY }}"
     dest: /var/tmp/re-download
     remote_src: yes
-  become: yes
-  become_user: root
-  become_method: sudo
 - name: Install the software
   command: "./install.sh -y"
   args:
     chdir: /var/tmp/re-download
     creates: /var/opt/redislabs/log/rlcheck.log
-  become: yes
-  become_user: root
-  become_method: sudo
 - name: chown redis dir filesystem
   file:
     dest: /redis
     owner: redislabs
     group: redislabs
     recurse: yes
-  become: yes
-  become_user: root
-  become_method: sudo
