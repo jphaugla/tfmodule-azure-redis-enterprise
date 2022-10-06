@@ -15,3 +15,44 @@
         disablerepo: rhui-rhel-7-server-dotnet-rhui-debug-rpms,rhui-rhel-7-server-dotnet-rhui-rpms,rhui-rhel-7-server-dotnet-rhui-source-rpms,rhui-rhel-7-server-rhui-debug-rpms,rhui-rhel-7-server-rhui-extras-debug-rpms,rhui-rhel-7-server-rhui-extras-rpms,rhui-rhel-7-server-rhui-extras-source-rpms,rhui-rhel-7-server-rhui-optional-debug-rpms,rhui-rhel-7-server-rhui-optional-rpms,rhui-rhel-7-server-rhui-optional-source-rpms,rhui-rhel-7-server-rhui-rh-common-debug-rpms,rhui-rhel-7-server-rhui-rh-common-rpms,rhui-rhel-7-server-rhui-rh-common-source-rpms,rhui-rhel-7-server-rhui-rpms,rhui-rhel-7-server-rhui-source-rpms,rhui-rhel-7-server-rhui-supplementary-debug-rpms,rhui-rhel-7-server-rhui-supplementary-rpms,rhui-rhel-7-server-rhui-supplementary-source-rpms,rhui-rhel-server-rhui-rhscl-7-debug-rpms,rhui-rhel-server-rhui-rhscl-7-rpms,rhui-rhel-server-rhui-rhscl-7-source-rpms
   roles:
     - redis-enterprise
+- hosts: tester_node_ips
+  gather_facts: True
+  become: yes
+  become_user: root
+  become_method: sudo
+  pre_tasks:
+  - name: Update Apt Cache
+    apt: update_cache=yes
+    when: ansible_os_family == "Debian"
+  - name: Ubuntu Packages
+    package:
+      pkg: 
+        - build-essential
+        - autoconf
+        - automake
+        - libbsd-dev
+        - libltdl-dev
+        - libltdl7
+        - libtool
+        - libpcre3-dev
+        - libevent-dev
+        - pkg-config
+        - zlib1g-dev
+        - libssl-dev
+        - nginx
+  - name: Set to Realistic Hostname
+    hostname:
+      name: "tester"
+  - name: Setup Hostsfile
+    lineinfile:
+      dest: /etc/hosts
+      regexp: '^127\.0\.0\.1[ \t]+localhost'
+      line: "127.0.0.1 localhost tester"
+      state: present
+  handlers:
+  - name: restart_nginx
+    service:
+      name: nginx
+      state: restarted
+  roles:
+    - tester-node
