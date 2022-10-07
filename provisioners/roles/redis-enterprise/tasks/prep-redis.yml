@@ -2,10 +2,6 @@
   file:
     state: directory
     path: "/redis"
-- name: create re home dir
-  file:
-    state: directory
-    path: "/redis"
 - name: create download directory
   file:
     state: directory
