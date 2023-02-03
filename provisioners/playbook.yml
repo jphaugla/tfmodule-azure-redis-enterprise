@@ -40,6 +40,8 @@
         - zlib1g-dev
         - libssl-dev
         - nginx
+        - openjdk-18-jdk
+        - openjdk-18-jre
   - name: Set to Realistic Hostname
     hostname:
       name: "tester"
