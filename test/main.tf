@@ -13,12 +13,12 @@ module "azure" {
     Config      = "terraform",
     Environment = "tf-test"
   }
-  cluster-base-domain = "demo-azure.redislabs.com"
+  cluster-base-domain = "demo-azure.jphaugla.com"
   cluster-name = "jphaugla"
   node-size = "Standard_DS4_v2"
-  cluster-base-resource-group = "resource_group"
+  cluster-base-resource-group = "jphaugla"
   username = "demo@demo.com"
-  password = "nicepassword"
+  password = "jasonrocks"
   node-publisher = "RedHat"
   node-offer     = "RHEL"
   node-sku       = "7-RAW"
@@ -28,5 +28,5 @@ module "azure" {
   test-offer     = "0001-com-ubuntu-server-jammy"
   test-sku       = "22_04-lts-gen2"
   test-version   = "latest"
-  re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.2.18/redislabs-6.2.18-43-rhel7-x86_64.tar"
+  re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.4.2/redislabs-6.4.2-94-rhel7-x86_64.tar"
 }
