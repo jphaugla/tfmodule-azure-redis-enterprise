@@ -16,7 +16,7 @@ module "azure" {
   cluster-base-domain = "demo-azure.jphaugla.com"
   cluster-name = "jphaugla"
   node-size = "Standard_DS4_v2"
-  cluster-base-resource-group = "jphaugla"
+  cluster-base-resource-group = "jphaugla-dns"
   username = "demo@demo.com"
   password = "jasonrocks"
   node-publisher = "RedHat"

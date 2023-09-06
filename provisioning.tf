@@ -7,7 +7,7 @@ resource "null_resource" "provision" {
 
     provisioner "local-exec" {
         working_dir = "../provisioners/"
-        command = "ansible-playbook -i '${var.instances_inventory_file}' --private-key ${var.ssh-private-key} playbook.yml ${var.ansible_verbosity_switch} -e 'S3_RE_BINARY=${var.re-download-url}'"
+        command = "ansible-playbook -i '${var.instances_inventory_file}' --private-key ${var.ssh-private-key} playbook.yml ${var.ansible_verbosity_switch}  -e 'tester_username=${var.ssh-user}' -e 'S3_RE_BINARY=${var.re-download-url}'"
     }
 
     depends_on = [

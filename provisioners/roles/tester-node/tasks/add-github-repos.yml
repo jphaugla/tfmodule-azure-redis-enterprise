@@ -1,0 +1,22 @@
+
+- name: checkout redisearchStock git repo
+  git:
+    repo: 'https://github.com/jphaugla/redisearchStock'
+    dest: /home/{{ tester_username }}/redisearchStock
+
+- name: checkout bullmq repo
+  git:
+    repo: 'https://github.com/taskforcesh/bullmq'
+    dest: /home/{{ tester_username }}/bullmq
+
+- name: checkout bullmq repo
+  git:
+    repo: 'https://github.com/taskforcesh/bullmq-video-transcoder'
+    dest: /home/{{ tester_username }}/bullmq-video-transcoder
+
+- name: chown {{ tester_username }}
+  file:
+    dest: /home/{{ tester_username }}
+    owner: "{{ tester_username }}"
+    group: "{{ tester_username }}"
+    recurse: yes
