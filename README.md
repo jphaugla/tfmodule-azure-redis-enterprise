@@ -8,7 +8,7 @@
 ## Initialize Azure Credentials
 
 ```BASH
-$ az login
+az login
 ```
 
 ## Module usage (Basic)
@@ -28,4 +28,24 @@ module "azure-redis-enterprise" {
   }
 }
 
+```
+
+From the `test` folder, update the `main.tf` file with the correct parameters for your environment.
+
+Run
+```bash
+terraform init
+```
+
+```bash
+terraform plan
+```
+
+```bash
+terraform apply
+```
+
+To tear it all down:
+```bash
+terraform destroy
 ```
