@@ -13,12 +13,10 @@ module "azure" {
     Config      = "terraform",
     Environment = "tf-test"
   }
-  cluster-base-domain = "demo-azure.jphaugla.com"
-  cluster-name = "jphaugla"
+  cluster-base-domain = "jphaugla.demo-rlec.redislabs.com"
+  cluster-name = "jph"
   node-size = "Standard_DS4_v2"
   cluster-base-resource-group = "jphaugla-dns"
-  username = "demo@demo.com"
-  password = "jasonrocks"
   node-publisher = "RedHat"
   node-offer     = "RHEL"
   node-sku       = "7-RAW"

@@ -34,16 +34,6 @@ variable "cluster-base-resource-group" {
   default = "not-defined"
 }
 
-variable "username" {
-  description = "redis enterprise user name.  Should be an email address"
-  default = "demo@redislabs.com"
-}
-
-variable "password" {
-  description = "redis enterprise password"
-  default = ""
-}
-
 variable "node-size" {
   description = "The Size of the VM to run for nodes."
   default     = "Standard_DS4_v2"

@@ -3,8 +3,6 @@ locals {
   cluster-name = var.cluster-name
   cluster-base-domain = var.cluster-base-domain
   cluster-base-resource-group = var.cluster-base-resource-group
-  username= var.username
-  password= var.password
 }
 
 # If there's no upstream record to update, create one
@@ -26,7 +24,7 @@ resource "azurerm_dns_a_record" "fixedip" {
 
 # TODO - allow switching between public and private IP addressing in DNS
 resource "azurerm_dns_ns_record" "fixedip" {
-  count = var.node-count
+  count               = var.node-count
   name                = "${local.cluster-name}"
   zone_name           = "${local.cluster-base-domain}"
   resource_group_name = local.cluster-base-resource-group
