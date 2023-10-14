@@ -1,3 +1,6 @@
+- meta: end_play
+  when: skipping_tester|bool
+
 - name: install redis tools
   include_tasks: install-redis-tools.yml
   when:
@@ -8,7 +11,7 @@
   when:
     - add_github_repos|bool
 
-- name: install java, maven and go
+- name: install java maven and go
   include_tasks: install-java-maven-go.yml
   when:
     - install_java_maven_go|bool

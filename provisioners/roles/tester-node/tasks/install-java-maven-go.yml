@@ -2,6 +2,8 @@
   apt_repository:
     repo: 'ppa:longsleep/golang-backports'
     state: present
+  ignore_errors: true
+
 - name: Install Go
   package:
     name: golang

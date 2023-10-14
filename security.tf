@@ -1,4 +1,5 @@
 // Using the IP of the installer for security rules
+//  NOTE:  this might not match the IP used by azure-may need to use the azure ip and hard code
 data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
 }
@@ -18,6 +19,20 @@ resource "azurerm_network_security_rule" "install-ssh" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "22"
+  source_address_prefix       = "${chomp(data.http.myip.response_body)}/32"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.resource.name
+  network_security_group_name = azurerm_network_security_group.sg.name
+}
+
+resource "azurerm_network_security_rule" "kafka-control" {
+  name                        = "kafka-rule"
+  priority                    = 2003
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "8000-9999"
   source_address_prefix       = "${chomp(data.http.myip.response_body)}/32"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.resource.name
@@ -120,6 +135,21 @@ resource "azurerm_network_security_rule" "open-nets" {
   source_port_range           = "*"
   destination_port_range      = "*"
   source_address_prefix       = element(var.open-nets, count.index)
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.resource.name
+  network_security_group_name = azurerm_network_security_group.sg.name
+}
+
+resource "azurerm_network_security_rule" "open-net-cidr" {
+  count                       = length(var.net-cidr)
+  name                        = "Net-cidr-${count.index}"
+  priority                    = format("%02d", count.index + 4000)
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = element(var.net-cidr, count.index)
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.resource.name
   network_security_group_name = azurerm_network_security_group.sg.name

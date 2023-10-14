@@ -1,0 +1,6 @@
+listeners=http://{{use_hostname}}:8081
+kafkastore.bootstrap.servers=PLAINTEXT://{{use_hostname}}:9092
+kafkastore.topic=_schemas
+debug=false
+metadata.encoder.secret=REPLACE_ME_WITH_HIGH_ENTROPY_STRING
+resource.extension.class=io.confluent.dekregistry.DekRegistryResourceExtension

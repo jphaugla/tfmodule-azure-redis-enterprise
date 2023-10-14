@@ -1,0 +1,29 @@
+- name: start zookeeper
+  become: yes
+  shell:
+    cmd: systemctl start confluent-zookeeper
+
+- name: start kafka server
+  become: yes
+  shell:
+    cmd: systemctl start confluent-server
+
+- name: start control center
+  become: yes
+  shell:
+    cmd: systemctl start confluent-control-center
+
+- name: start kafka rest
+  become: yes
+  shell:
+    cmd: systemctl start confluent-kafka-rest
+
+- name: start schema registry
+  become: yes
+  shell:
+    cmd: systemctl start confluent-schema-registry
+
+- name: start ksqldb
+  become: yes
+  shell:
+    cmd: systemctl start confluent-ksqldb

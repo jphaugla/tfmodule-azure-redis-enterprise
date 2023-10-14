@@ -1,3 +1,6 @@
+- meta: end_play
+  when: skipping_re|bool
+
 - name: Prepare Redis Nodes
   include_tasks: prep-redis.yml
   when:

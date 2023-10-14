@@ -16,15 +16,18 @@ module "azure" {
   cluster-base-domain = "jphaugla.demo-rlec.redislabs.com"
   cluster-name = "jph"
   node-size = "Standard_DS4_v2"
+  node-count = 3
   cluster-base-resource-group = "jphaugla-dns"
   node-publisher = "RedHat"
   node-offer     = "RHEL"
   node-sku       = "7-RAW"
   node-version   = "latest"
   test-size = "Standard_DS4_v2"
+  tester-count     = 1
   test-publisher = "Canonical"
   test-offer     = "0001-com-ubuntu-server-jammy"
   test-sku       = "22_04-lts-gen2"
   test-version   = "latest"
+  kafka-count    = 0
   re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.4.2/redislabs-6.4.2-94-rhel7-x86_64.tar"
 }

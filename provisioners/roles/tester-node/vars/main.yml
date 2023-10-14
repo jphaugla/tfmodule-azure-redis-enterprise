@@ -1,5 +1,7 @@
 install_redis_tools: true
 add_github_repos: true
 #  this works fine but the maven version keeps changing so setting to false
-install_java_maven_go: false
-maven_version: '3.9.4'
+install_java_maven_go: true
+maven_version: '3.9.5'
+#  this will skip setup of redis enterprise - handy to save time when rerunning other part of solution
+skipping_tester: false

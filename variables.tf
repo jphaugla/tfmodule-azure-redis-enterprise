@@ -92,13 +92,24 @@ variable "subnet-count" {
 }
 
 variable "node-count" {
-  description = "The number of nodes to spin up"
+  description = "The number of Redis nodes to spin up"
   default     = 3
 }
+
 
 variable "join-count" {
   description = "The number of non-master re nodes"
   default     = 2
+}
+
+variable "tester-count" {
+  description = "The number of Tester nodes to spin up"
+  default     = 1
+}
+
+variable "kafka-count" {
+  description = "The number of kafka nodes to spin up-really is 0 or 1"
+  default     = 1
 }
 
 variable "common-tags" {

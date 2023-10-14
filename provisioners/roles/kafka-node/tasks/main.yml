@@ -1,0 +1,13 @@
+- name: confluent install
+  include_tasks: confluent-install.yml
+  when:
+    - install_confluent|bool
+- name: confluent property file cretion
+  include_tasks: confluent-properties.yml
+  when:
+    - create_confluent_properties|bool
+- name: confluent start
+  include_tasks: confluent-start.yml
+  when:
+    - start_confluent|bool
+

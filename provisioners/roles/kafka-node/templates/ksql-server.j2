@@ -1,0 +1,7 @@
+listeners=http://{{use_hostname}}:8088
+ksql.logging.processing.topic.auto.create=true
+ksql.logging.processing.stream.auto.create=true
+bootstrap.servers={{use_hostname}}:9092
+compression.type=snappy
+ksql.schema.registry.url=http://{{use_hostname}}:8081
+state.dir=/var/lib/kafka-streams

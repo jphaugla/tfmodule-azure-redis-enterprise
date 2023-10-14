@@ -19,6 +19,9 @@ ${re_instance_ips}
 [tester_node_ips]
 ${tester_ips}
 
+[kafka_node_ips]
+${kafka_ips}
+
 [all:vars]
 ansible_connection=ssh
 ansible_user=${ssh_user}
