@@ -4,3 +4,6 @@ terraform.tfstate*
 tmuxer
 test/.terraform
 .idea/
+# .DS_Store
+.DS_Store
+provisioners/inventory

@@ -1,0 +1,9 @@
+- name: install connect datagen plugin
+  become: yes
+  shell:
+    cmd:  confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:0.6.2
+
+- name: install redis kafka connect
+  become: yes
+  shell:
+    cmd:  confluent-hub install --no-prompt redis/redis-enterprise-kafka:6.7.4

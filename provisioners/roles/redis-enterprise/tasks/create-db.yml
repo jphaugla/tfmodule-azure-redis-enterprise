@@ -50,8 +50,9 @@
   when: not db_created
 
 - name: Get DB 1
+#  note, each time database is deleted this increments so on rerun must change the database number
   uri:
-    url: "{{ bdbs_endpoint }}/1"
+    url: "{{ bdbs_endpoint }}/11"
     method: GET
     return_content: yes
     validate_certs: no
@@ -73,6 +74,50 @@
       - "DB external endpoint: {{db1.json.endpoints[0].dns_name}}"
       - "DB internal endpoint: {{db1.json.endpoints[1].dns_name}}"
   when: db_created
+
+- name: save db port
+  copy:
+    content: "{{db1.json.endpoints[0].port}}"
+    dest: redis_port.txt
+
+- name: save db external endpoint
+  copy:
+    content: "{{db1.json.endpoints[0].dns_name}}"
+    dest: redis_external_endpoint.txt
+
+- name: save db internal endpoint
+  copy:
+    content: "{{db1.json.endpoints[1].dns_name}}"
+    dest: redis_internal_endpoint.txt
+
+- name: save db password
+  copy:
+    content: "{{re_password}}"
+    dest: redis_password.txt
+
+- name: save db port
+  fetch:
+    dest: temp/
+    src: redis_port.txt
+    flat: yes
+
+- name: save db external endpoint
+  fetch:
+    dest: temp/
+    src: redis_external_endpoint.txt
+    flat: yes
+
+- name: save db internal endpoint
+  fetch:
+    dest: temp/
+    src: redis_internal_endpoint.txt
+    flat: yes
+
+- name: save db password
+  fetch:
+    dest: temp/
+    src: redis_password.txt
+    flat: yes
 
 - name: GCP VMs
   debug:

@@ -10,4 +10,11 @@
   include_tasks: confluent-start.yml
   when:
     - start_confluent|bool
-
+- name: add confluent plug-ins
+  include_tasks: confluent-connect-plug.yml
+  when:
+    - plugin_confluent|bool
+- name: add confluent connectors
+  include_tasks: confluent-add-connectors.yml
+  when:
+    - add_connectors|bool

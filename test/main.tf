@@ -28,6 +28,6 @@ module "azure" {
   test-offer     = "0001-com-ubuntu-server-jammy"
   test-sku       = "22_04-lts-gen2"
   test-version   = "latest"
-  kafka-count    = 0
+  kafka-count    = 1
   re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.4.2/redislabs-6.4.2-94-rhel7-x86_64.tar"
 }

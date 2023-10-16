@@ -5,4 +5,8 @@ username: "{{ansible_user}}"
 install_confluent: true
 create_confluent_properties: true
 start_confluent: true
+plugin_confluent: true
+add_connectors: true
+#  this hostname is hardcoded additionally in the playbook
 use_hostname: kafka
+connect_endpoint: http://localhost:8083

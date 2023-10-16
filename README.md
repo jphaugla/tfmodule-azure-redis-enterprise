@@ -11,6 +11,9 @@
 az login
 ```
 
+## Links
+[installing, configuring, running confluent platform](https://docs.confluent.io/platform/current/installation/installing_cp/deb-ubuntu.html)
+
 ## Module usage (Basic)
 
 Public Azure Instance and Network setup
