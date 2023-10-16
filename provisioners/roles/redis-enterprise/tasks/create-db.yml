@@ -52,7 +52,7 @@
 - name: Get DB 1
 #  note, each time database is deleted this increments so on rerun must change the database number
   uri:
-    url: "{{ bdbs_endpoint }}/11"
+    url: "{{ bdbs_endpoint }}/1"
     method: GET
     return_content: yes
     validate_certs: no
