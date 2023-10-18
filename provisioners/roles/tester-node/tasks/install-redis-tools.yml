@@ -7,11 +7,11 @@
   make:
     chdir: /home/{{ tester_username }}/redis
 
-- name: redis - Run 'install' target as root
+- name: redis - Run install target as root
+  become: yes
   make:
     chdir: /home/{{ tester_username }}/redis
     target: install
-  become: yes
 
 - name: checkout memtier_benchmark git repo
   git:
@@ -60,6 +60,7 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Enable Redis Insights Services
   systemd:
     name: redis-insights

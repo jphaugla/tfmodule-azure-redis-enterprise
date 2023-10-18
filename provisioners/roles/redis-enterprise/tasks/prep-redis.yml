@@ -11,6 +11,7 @@
     src: "{{ S3_RE_BINARY }}"
     dest: /var/tmp/re-download
     remote_src: yes
+    creates: /var/tmp/re-download/install.sh
 - name: Install the software
   command: "./install.sh -y"
   args:

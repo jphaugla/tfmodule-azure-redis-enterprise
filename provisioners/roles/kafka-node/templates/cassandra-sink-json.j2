@@ -1,0 +1,16 @@
+{
+  "name": "cassandra-sink",
+  "config": {
+    "topic.pageviews.pageviews.views.mapping": "viewtime=value.viewtime, userid=value.userid, pageid=value.pageid",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false",
+    "name": "cassandra-sink",
+    "connector.class": "com.datastax.kafkaconnector.DseSinkConnector",
+    "tasks.max": "1",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "topics": "pageviews",
+    "contactPoints": "{{lookup('file', './temp/cassandra_internal_ip.txt')}}",
+    "loadBalancing.localDc": "datacenter1"
+  }
+}

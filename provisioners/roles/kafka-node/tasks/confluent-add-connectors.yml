@@ -23,3 +23,16 @@
     headers:
         Content-Type: "application/json"
   ignore_errors: true
+
+- name: Creating cassandra sink connector
+  uri:
+    url: "{{connect_endpoint}}/connectors"
+    method: POST
+    return_content: yes
+    validate_certs: no
+    follow_redirects: all
+    body: "{{ lookup('template','cassandra-sink-json.j2') }}"
+    body_format: json
+    headers:
+        Content-Type: "application/json"
+  ignore_errors: true

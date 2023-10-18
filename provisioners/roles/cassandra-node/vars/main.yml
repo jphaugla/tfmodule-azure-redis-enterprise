@@ -1,0 +1,17 @@
+# vars file for cassandra
+cluster_name: KafkaCassandra
+authenticator: PasswordAuthenticator
+authorizer: CassandraAuthorizer
+data_file_directories: /bigdata/cassandra/data
+commitlog_directory: /bigdata/cassandra/commitlog
+saved_caches_directory: /bigdata/cassandra/saved_caches
+read_request_timeout_in_ms: 30000
+range_request_timeout_in_ms: 30000
+write_request_timeout_in_ms: 30000
+counter_write_request_timeout_in_ms: 30000
+cas_contention_timeout_in_ms: 30000
+truncate_request_timeout_in_ms: 60000
+request_timeout_in_ms: 30000
+slow_query_log_timeout_in_ms: 30000
+cassandra_installation_path: /bigdata/cassandra
+cassandra_deb_path: /home/redislabs/cassandra_4.0.5_all.deb

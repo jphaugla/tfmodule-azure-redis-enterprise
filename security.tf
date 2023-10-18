@@ -1,8 +1,5 @@
 // Using the IP of the installer for security rules
 //  NOTE:  this might not match the IP used by azure-may need to use the azure ip and hard code
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
 
 resource "azurerm_network_security_group" "sg" {
   name                = local.net-name
@@ -19,7 +16,7 @@ resource "azurerm_network_security_rule" "install-ssh" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "22"
-  source_address_prefix       = "${chomp(data.http.myip.response_body)}/32"
+  source_address_prefix       = "${chomp(var.my-ip)}/32"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.resource.name
   network_security_group_name = azurerm_network_security_group.sg.name
@@ -33,7 +30,7 @@ resource "azurerm_network_security_rule" "kafka-control" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "8000-9999"
-  source_address_prefix       = "${chomp(data.http.myip.response_body)}/32"
+  source_address_prefix       = "${chomp(var.my-ip)}/32"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.resource.name
   network_security_group_name = azurerm_network_security_group.sg.name
@@ -76,7 +73,7 @@ resource "azurerm_network_security_rule" "redis-dbs" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "10001-19999"
-  source_address_prefix       = "${chomp(data.http.myip.response_body)}/32"
+  source_address_prefix       = "${chomp(var.my-ip)}/32"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.resource.name
   network_security_group_name = azurerm_network_security_group.sg.name

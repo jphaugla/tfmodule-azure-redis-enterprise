@@ -14,6 +14,10 @@ variable "net-cidr" {
   default     = ["10.0.11.0/24"]
 }
 
+variable "my-ip" {
+  description = "The ip address for Azure.  Use azure portal UI to look up this value.  May be different than public ip"
+}
+
 variable "net-name" {
   description = "The name to be associated with the network"
   default     = null
@@ -109,6 +113,11 @@ variable "tester-count" {
 
 variable "kafka-count" {
   description = "The number of kafka nodes to spin up-really is 0 or 1"
+  default     = 1
+}
+
+variable "cassandra-count" {
+  description = "The number of cassandra nodes to spin up-really is 0 or 1"
   default     = 1
 }
 

@@ -7,3 +7,8 @@
   become: yes
   shell:
     cmd:  confluent-hub install --no-prompt redis/redis-enterprise-kafka:6.7.4
+
+- name: install cassandra connector
+  become: yes
+  shell:
+    cmd:  confluent-hub install --no-prompt confluentinc/kafka-connect-cassandra:2.0.5

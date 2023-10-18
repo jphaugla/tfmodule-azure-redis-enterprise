@@ -22,6 +22,9 @@ ${tester_ips}
 [kafka_node_ips]
 ${kafka_ips}
 
+[cassandra_node_ips]
+${cassandra_ips}
+
 [all:vars]
 ansible_connection=ssh
 ansible_user=${ssh_user}

@@ -1,0 +1,62 @@
+- name: Get the IPs
+  set_fact:
+    ip_ext_node: "{{ inventory_hostname }}"
+    ip_int_node: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+
+- name: save external ip
+  copy:
+    content: "{{ ip_ext_node }}"
+    dest: cassandra_external_ip.txt
+
+- name: save external ip locally
+  fetch:
+    dest: temp/
+    src: cassandra_external_ip.txt
+    flat: yes
+
+- name: save internal ip
+  copy:
+    content: "{{ ip_int_node }}"
+    dest: cassandra_internal_ip.txt
+
+- name: save internal ip locally
+  fetch:
+    dest: temp/
+    src: cassandra_internal_ip.txt
+    flat: yes
+
+- name: remove cassandra.sources.list if it exists
+  file:
+    path: /etc/apt/sources.list.d/cassandra.sources.list
+    state: absent
+  ignore_errors: true
+
+- name: set up cassandra apt repository file
+  become: true
+  shell:
+    cmd: echo "deb https://debian.cassandra.apache.org 41x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+  ignore_errors: true
+
+- name: set up cassandra apt repository file
+  become: true
+  shell:
+    cmd: curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+  ignore_errors: true
+
+
+- name: Install cassandra
+  package:
+    name: cassandra
+    update_cache: yes
+
+- name: replace rpc_address in cassandra.yaml
+  lineinfile:
+    dest: /etc/cassandra/cassandra.yaml
+    regexp: '^# broadcast_rpc_address:'
+    line: "broadcast_rpc_address: {{ ip_int_node }}"
+    state: present
+
+- name: restart cassandra
+  become: yes
+  shell:
+    cmd: systemctl restart cassandra

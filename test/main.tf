@@ -8,6 +8,8 @@ module "azure" {
   ssh-key          = "~/.ssh/id_rsa_azure.pub"
   ssh-private-key  = "~/.ssh/id_rsa_azure"
   open-nets        = ["10.0.0.12/32"]
+#  use azure portal gui to lookup azure ip address.  May not be same as normal public ip
+  my-ip            = "174.141.204.193"
   common-tags = {
     Owner       = "jason.haugland@redis.com",
     Config      = "terraform",
@@ -29,5 +31,6 @@ module "azure" {
   test-sku       = "22_04-lts-gen2"
   test-version   = "latest"
   kafka-count    = 1
-  re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/6.4.2/redislabs-6.4.2-94-rhel7-x86_64.tar"
+  cassandra-count = 1
+  re-download-url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/7.2.4/redislabs-7.2.4-72-rhel7-x86_64.tar"
 }
