@@ -70,7 +70,7 @@
 
 - name: wait until cassandra keyspace command is successful
   become: yes
-  command: cqlsh -e "create keyspace if not exists pageviews with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } ;"
+  command: cqlsh -e "create keyspace if not exists pageviews with replication = { 'class' ":" 'SimpleStrategy', 'replication_factor' ":" 1 } ;"
   retries: 20
   delay: 10
   register: result
