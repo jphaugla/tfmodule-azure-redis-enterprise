@@ -4,6 +4,11 @@
     repo: 'https://github.com/jphaugla/redisearchStock'
     dest: /home/{{ tester_username }}/redisearchStock
 
+- name: checkout Digital Banking git repo
+  git:
+    repo: 'https://github.com/jphaugla/Redisearch-Digital-Banking-redisTemplate.git'
+    dest: /home/{{ tester_username }}/Redisearch-Digital-Banking-redisTemplate
+
 - name: checkout bullmq repo
   git:
     repo: 'https://github.com/taskforcesh/bullmq'
