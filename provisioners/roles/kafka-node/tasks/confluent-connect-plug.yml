@@ -11,4 +11,4 @@
 - name: install cassandra connector
   become: yes
   shell:
-    cmd:  confluent-hub install --no-prompt confluentinc/kafka-connect-cassandra:2.0.5
+    cmd:  confluent-hub install --no-prompt datastax/kafka-connect-cassandra-sink:1.4.0

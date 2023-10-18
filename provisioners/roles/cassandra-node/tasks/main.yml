@@ -49,14 +49,33 @@
     name: cassandra
     update_cache: yes
 
-- name: replace rpc_address in cassandra.yaml
+- name: replace broadcast_rpc_address in cassandra.yaml
   lineinfile:
     dest: /etc/cassandra/cassandra.yaml
     regexp: '^# broadcast_rpc_address:'
     line: "broadcast_rpc_address: {{ ip_int_node }}"
     state: present
 
+- name: replace rpc_address in cassandra.yaml
+  lineinfile:
+    dest: /etc/cassandra/cassandra.yaml
+    regexp: '^rpc_address:'
+    line: "rpc_address: 0.0.0.0"
+    state: present
+
 - name: restart cassandra
   become: yes
   shell:
     cmd: systemctl restart cassandra
+
+- name: wait until cassandra keyspace command is successful
+  become: yes
+  command: cqlsh -e "create keyspace if not exists pageviews with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } ;"
+  retries: 20
+  delay: 10
+  register: result
+  until: result.rc == 0
+
+- name: create cassandra table
+  become: yes
+  command: cqlsh -e "create table if not exists pageviews.views (viewtime text, userid text, pageid text, primary key (viewtime));"

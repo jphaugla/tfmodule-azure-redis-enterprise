@@ -7,3 +7,4 @@ test/.terraform
 # .DS_Store
 .DS_Store
 provisioners/inventory
+provisioners/temp

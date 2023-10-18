@@ -2,6 +2,11 @@
   include_tasks: confluent-install.yml
   when:
     - install_confluent|bool
+#  must happen before confluent connect is started or plugins won't be usable until connect restart
+- name: add confluent plug-ins
+  include_tasks: confluent-connect-plug.yml
+  when:
+    - plugin_confluent|bool
 - name: confluent property file cretion
   include_tasks: confluent-properties.yml
   when:
@@ -10,10 +15,15 @@
   include_tasks: confluent-start.yml
   when:
     - start_confluent|bool
-- name: add confluent plug-ins
-  include_tasks: confluent-connect-plug.yml
-  when:
-    - plugin_confluent|bool
+
+- name: wait until connect is acive
+  become: yes
+  command: curl -X GET "{{connect_endpoint}}"
+  retries: 20
+  delay: 10
+  register: result
+  until: result.rc == 0
+
 - name: add confluent connectors
   include_tasks: confluent-add-connectors.yml
   when:
