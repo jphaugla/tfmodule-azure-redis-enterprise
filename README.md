@@ -1,5 +1,7 @@
 # tfmodule-azure-redis-enterprise
 
+This github uses anisble and terraform to create a full redis cluster of a specified number of nodes.  Optionally, additional one node tiers are available:  cassandra, ubuntu application node, and kafka node.
+
 ## Prerequisites 
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
@@ -16,8 +18,16 @@ az login
 
 ## Module usage (Basic)
 
-Public Azure Instance and Network setup
+Public Azure Instance and Network setup.  Note the count variables:
 
+* node-count:       number of redis nodes (3 is most common)
+* cassandra-count:  number of cassandra nodes (really just 1 or 0)
+* tester-count:     number of application node (really just 1 or 0)
+
+To allow access from local PC instigating the terraform/ansible, set the my-ip variable.  This allows connectivity to redis and cassandra ports from the instigating laptop IP address.  Easiest way to get this Azure public IP address is using the Azure portal.  Go to an existing security rule in the portal and use the *My IP address* option to see local desktop IP address to put in to the my-ip variable.
+![myip](images/MyIPAddress.png)
+
+## Module usage (More advanced)
 
 ```
 module "azure-redis-enterprise" {
