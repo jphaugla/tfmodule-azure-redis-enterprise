@@ -1,6 +1,6 @@
 id=kafka-rest-test-server
-schema.registry.url=http://{{use_hostname}}:8081
-zookeeper.connect={{use_hostname}}:2181
-bootstrap.servers=PLAINTEXT://{{use_hostname}}:9092
+schema.registry.url=http://{{ip_int_node}}:8081
+zookeeper.connect={{ip_int_node}}:2181
+bootstrap.servers=PLAINTEXT://{{ip_int_node}}:9092
 consumer.interceptor.classes=io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
 producer.interceptor.classes=io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor

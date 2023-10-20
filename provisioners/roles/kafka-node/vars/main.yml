@@ -10,3 +10,4 @@ add_connectors: true
 #  this hostname is hardcoded additionally in the playbook
 use_hostname: kafka
 connect_endpoint: http://localhost:8083
+restapi_endpoint: http://localhost:8082

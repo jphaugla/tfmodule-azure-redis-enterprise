@@ -19,6 +19,7 @@
     user: "{{ re_username }}"
     password: "{{ re_password }}"
     force_basic_auth: yes
+    body_format: json
     follow_redirects: all
     headers:
       cache-control: no-cache
@@ -49,6 +50,7 @@
     method: GET
     return_content: yes
     validate_certs: no
+    body_format: json
     user: "{{ re_username }}"
     password: "{{ re_password }}"
     force_basic_auth: yes

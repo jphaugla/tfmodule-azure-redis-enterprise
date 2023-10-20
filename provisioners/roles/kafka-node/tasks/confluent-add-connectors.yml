@@ -11,6 +11,17 @@
         Content-Type: "application/json"
   ignore_errors: true
 
+- name: delete redis sink connector
+  uri:
+    url: "{{connect_endpoint}}/connectors/redis-sink-json"
+    method: DELETE
+    return_content: yes
+    validate_certs: no
+    follow_redirects: all
+    headers:
+        Content-Type: "application/json"
+  ignore_errors: true
+
 - name: Creating redis sink connector
   uri:
     url: "{{connect_endpoint}}/connectors"
