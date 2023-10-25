@@ -71,8 +71,8 @@
     msg:
       - "Admin UI: https://{{ re_cluster_name_fqdn }}:8443"
       - "DB: port: {{db1.json.endpoints[0].port}}"
-      - "DB external endpoint: {{db1.json.endpoints[0].dns_name}}"
-      - "DB internal endpoint: {{db1.json.endpoints[1].dns_name}}"
+      - "DB internal endpoint: {{db1.json.endpoints[0].dns_name}}"
+      - "DB external endpoint: {{db1.json.endpoints[1].dns_name}}"
   when: db_created
 
 - name: save db port

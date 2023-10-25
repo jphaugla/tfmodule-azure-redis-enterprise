@@ -19,7 +19,6 @@
     user: "{{ re_username }}"
     password: "{{ re_password }}"
     force_basic_auth: yes
-    body_format: json
     follow_redirects: all
     headers:
       cache-control: no-cache
@@ -50,7 +49,6 @@
     method: GET
     return_content: yes
     validate_certs: no
-    body_format: json
     user: "{{ re_username }}"
     password: "{{ re_password }}"
     force_basic_auth: yes
@@ -61,5 +59,6 @@
   until: cluster_creation_check.json.bootstrap_status.state == 'completed'
   delay: 2
   retries: 20
+  ignore_errors: true
   when:
     - not cluster_created

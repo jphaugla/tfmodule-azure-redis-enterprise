@@ -59,5 +59,6 @@
   until: cluster_join_check.json.bootstrap_status.state == 'completed'
   delay: 2
   retries: 20
+  ignore_errors: true
   when:
     - not joined

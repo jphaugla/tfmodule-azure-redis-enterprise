@@ -52,6 +52,7 @@
     url: https://downloads.redisinsight.redislabs.com/latest/redisinsight-linux64
     dest: /usr/local/bin/redisinsight
     mode: '0755'
+  when: install_redis_insights|bool
 
 - name: Redis Insights Systemd
   template:
@@ -60,12 +61,14 @@
     owner: root
     group: root
     mode: 0644
+  when: install_redis_insights|bool
 
 - name: Enable Redis Insights Services
   systemd:
     name: redis-insights
     enabled: yes
     state: started
+  when: install_redis_insights|bool
 
 - name: Enable Redis Insights Services in Nginx
   template:
@@ -76,6 +79,7 @@
     mode: 0644
   notify:
     - restart_nginx
+  when: install_redis_insights|bool
 
 - name: Enable Redis Insights Services
   file:
@@ -83,6 +87,7 @@
     state: absent
   notify:
     - restart_nginx
+  when: install_redis_insights|bool
  
 - name: chown {{ tester_username }}
   file:
