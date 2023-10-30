@@ -15,6 +15,7 @@ az login
 
 ## Links
 [installing, configuring, running confluent platform](https://docs.confluent.io/platform/current/installation/installing_cp/deb-ubuntu.html)
+[Azure terraform provider](https://github.com/hashicorp/terraform-provider-azurerm)
 
 ## Module usage (Basic)
 
@@ -22,7 +23,8 @@ Public Azure Instance and Network setup.  Note the count variables:
 
 * node-count:       number of redis nodes (3 is most common)
 * cassandra-count:  number of cassandra nodes (really just 1 or 0)
-* tester-count:     number of application node (really just 1 or 0)
+* tester-count:     number of application nodes (really just 1 or 0)
+* kafka-count:      number of kafka nodes (really just 1 or 0)
 
 To allow access from local PC instigating the terraform/ansible, set the my-ip variable.  This allows connectivity to redis and cassandra ports from the instigating laptop IP address.  Easiest way to get this Azure public IP address is using the Azure portal.  Go to an existing security rule in the portal and use the *My IP address* option to see local desktop IP address to put in to the my-ip variable.
 ![myip](images/MyIPAddress.png)
@@ -104,8 +106,18 @@ viewtime | pageid  | userid
     11191 | Page_32 | User_3
     14221 | Page_68 | User_3
 ```
+## Tech notes
+* test/main.tf has the important parameters.  
+* Other paramaters are available in variables.tf.
+* A template file at templates/inventory.tpl maps connects terraform to ansible along with provisioning.tf
+* Ansible is all in the provisioners directory using the playbook.yml file
+* Each of the node groups (redis, tester, cassandra, kafka) have a separate role under the provisioners/role directory (cassandra-node, kafka-node, redis-enterprise, tester-node)
+* Under each of these roles, a vars/main.yml file has variable flags to enable/disable processing
+  * To eliminate all process on one of these node groups, best to set the node count to zero in test/main.tf
+* Under each of these roles  a tasks/main.yml calls the required tasks to do the actual processing
 
 To tear it all down:
+NOTE:  on teardown, may see failures on delete of some azure components.  Re-running the destroy command will eventually be successful
 ```bash
 terraform destroy
 ```
