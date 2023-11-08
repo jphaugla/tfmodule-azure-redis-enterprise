@@ -2,6 +2,8 @@
 
 This github uses anisble and terraform to create a full redis cluster of a specified number of nodes.  Optionally, additional one node tiers are available:  cassandra, ubuntu application node, and kafka node.
 
+## Full Deployment
+![Deployment](images/deployment.png)
 ## Prerequisites 
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
@@ -97,7 +99,7 @@ system     system_distributed  system_traces  system_virtual_schema
 
 ### redis
 ```bash
-redis-cli -h <redis_external_endpoint.txt> -p <redis_port.txt> -a jasonrocks
+redis-cli -h <redis_external_endpoint.txt> -p <redis_port.txt> -a redis123
 6077) "pageviews:27061"
 6078) "pageviews:65441"
 6079) "pageviews:60781"
